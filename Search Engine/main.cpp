@@ -1,8 +1,7 @@
 #include "SearchEngine.h"
-#include <iostream>
-using namespace std;
+
 int main() {
-    SearchEngine s;
-    s.input();
+     SearchEngine s;
+     s.run();
     return 0;
 }
