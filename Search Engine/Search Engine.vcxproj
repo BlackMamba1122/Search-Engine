@@ -129,11 +129,15 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SearchEngine.cpp" />
+    <ClCompile Include="SearchEngine_Tries.cpp" />
+    <ClCompile Include="Tries.cpp" />
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="WordMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SearchEngine.h" />
+    <ClInclude Include="SearchEngine_Tries.h" />
+    <ClInclude Include="Tries.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="WordMap.h" />
   </ItemGroup>

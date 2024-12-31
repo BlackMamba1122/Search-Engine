@@ -9,7 +9,7 @@
 #include<conio.h>
 #include<Windows.h>
 
-void SearchEngine::crawl(const string& path)
+void SearchEngine::crawl()
 {
     SetClr(YELLOW, BLACK);
     system("cls");
@@ -48,7 +48,7 @@ void SearchEngine::crawl(const string& path)
 void SearchEngine::search(const string& path) {
     std::ifstream file(path);
     if (!file.is_open()) {
-        std::cerr << "Error: Could not open file " << path << std::endl;
+        //std::cerr << "Error: Could not open file " << path << std::endl;
         return;
     }
 
@@ -96,8 +96,9 @@ std::vector<WordMap> SearchEngine::searchWord(const std::string& word) {
         std::vector<WordMap> result2;
         std::stringstream ss(word);
         std::string token;
-
+        int wordCount = -2;
         while (ss >> token) {
+            wordCount += 1;
             if (Hash.find(token) == Hash.end()) {
                 results.clear();
                 break;
@@ -122,7 +123,7 @@ std::vector<WordMap> SearchEngine::searchWord(const std::string& word) {
                             std::vector<streampos> validPositions;
 
                             for (auto& pos1 : res1.pos) {
-                                int nextPos = static_cast<int>(pos1)+ 1;
+                                int nextPos = static_cast<int>(pos1)+ 1+wordCount;
                                 if (std::find(res2.pos.begin(), res2.pos.end(), nextPos) != res2.pos.end()) {
                                     validPositions.push_back(pos1);
                                 }
@@ -379,7 +380,7 @@ void SearchEngine::dumpSearchEngine(const std::string& filename)
 {
     std::ofstream ofs(filename, std::ios::binary | std::ios::trunc);
     if (!ofs) {
-        std::cerr << "Failed to open file for dumping: " << filename << std::endl;
+       //std::cerr << "Failed to open file for dumping: " << filename << std::endl;
         return;
     }
 
@@ -405,8 +406,8 @@ void SearchEngine::loadSearchEngine(const std::string& filename)
 {
     std::ifstream ifs(filename, std::ios::binary);
     if (!ifs) {
-        std::cerr << "File does not exist: " << filename << ". A new index will be created." << std::endl;
-        crawl("review/");
+        //std::cerr << "File does not exist: " << filename << ". A new index will be created." << std::endl;
+        crawl();
         dumpSearchEngine(filename);
         return;
     }
@@ -467,7 +468,7 @@ void SearchEngine::loadSearchEngine(const std::string& filename)
 std::string SearchEngine::getSampleLine(const std::string& fileName, std::streampos position) {
     std::ifstream file(fileName);
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file: " << fileName << std::endl;
+        //std::cerr << "Error: Unable to open file: " << fileName << std::endl;
         return "";
     }
 
@@ -511,7 +512,7 @@ void SearchEngine::addFile()
     std::ofstream file(filename);
 
     if (!file) {
-        std::cerr << "Error opening file!" << std::endl;
+        //std::cerr << "Error opening file!" << std::endl;
         return;
     }
 
